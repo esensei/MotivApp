@@ -1,0 +1,1 @@
+export  InfoRings from './InfoRings'

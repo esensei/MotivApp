@@ -4,18 +4,36 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
+import axios from 'axios'
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 class AuthLoadingScreen extends Component {
   componentDidMount() {
-    const { warn } = console
+    const url = 'http://borolis.site:8000/api/users/current'
+
     AsyncStorage.getItem('apitoken')
-      .then(res => {
-        //TODO VALIDATION
+      .then(apitoken => {
+        axios.get(url,{
+          headers: {
+            Authorization: `Token ${apitoken}`
+          }
+        }).then(
+          res => this.props.navigation.navigate('App')
+        )
+          .catch( () => {
+            this.props.navigation.navigate('SignIn')
+            }
+          )
 
       })
-      .catch(err => warn(err))
+      .catch(err => {
+
+        AsyncStorage.removeItem('apitoken')
+          .then(() => this.props.navigation.navigate('SignIn'))
+          .catch(() => this.props.navigation.navigate('SignIn'))
+
+      })
   }
 
   render() {

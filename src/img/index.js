@@ -1,0 +1,5 @@
+export Uslugi from './Uslugi'
+export Rashodi from './Rashodi'
+export Tariff from './Tariff'
+export PhoneIcon from './PhoneIcon'
+export Mail from './Mail'
