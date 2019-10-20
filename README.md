@@ -1,1 +1,2 @@
 # MotivApp
+React-native + Redux
